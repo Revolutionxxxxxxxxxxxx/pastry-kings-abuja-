@@ -251,12 +251,11 @@
 
         .gallery-item:hover .gallery-overlay { transform: translateY(0); }
 
-        /* Upload Section - HIDDEN BY DEFAULT */
         .upload-section {
             background: linear-gradient(135deg, var(--black), #2d2d2d);
             color: var(--white);
             text-align: center;
-            display: none; /* Hidden by default */
+            display: none;
         }
 
         .upload-section.visible { display: block; }
@@ -484,7 +483,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Admin Login Modal */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -582,7 +580,6 @@
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav>
         <div class="nav-container">
             <a href="#" class="logo">
@@ -603,7 +600,6 @@
         </div>
     </nav>
 
-    <!-- Admin Login Modal -->
     <div class="modal-overlay" id="adminModal">
         <div class="modal-box">
             <button class="modal-close" id="modalClose">&times;</button>
@@ -626,13 +622,12 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
             <h1><i class="fas fa-crown"></i> PastryKings Abuja</h1>
             <p>Where Every Bite is Royal Treatment</p>
             <div class="cta-buttons">
-                <a href="#" class="btn btn-primary whatsapp-order" target="_blank">
+                <a href="https://wa.me/2347033115877?text=Hello%20PastryKings%2C%20I%20would%20like%20to%20place%20an%20order" class="btn btn-primary" target="_blank">
                     <i class="fab fa-whatsapp"></i> Order Now
                 </a>
                 <a href="#gallery" class="btn btn-secondary">
@@ -642,13 +637,11 @@
         </div>
     </section>
 
-    <!-- Gallery Section -->
     <section class="gallery" id="gallery">
         <h2 class="section-title">Our Creations</h2>
         <div class="gallery-grid" id="galleryGrid"></div>
     </section>
 
-    <!-- Upload Section (ADMIN ONLY) -->
     <section class="upload-section" id="upload">
         <h2 class="section-title"><i class="fas fa-user-shield"></i> Admin: Upload Your Photos</h2>
         <div class="upload-form">
@@ -674,7 +667,6 @@
         </div>
     </section>
 
-    <!-- Reviews Section -->
     <section class="reviews" id="reviews">
         <h2 class="section-title">What Our Customers Say</h2>
         <div class="reviews-container">
@@ -715,7 +707,6 @@
         </div>
     </section>
 
-    <!-- Location Section -->
     <section class="location" id="location">
         <h2 class="section-title">Find Us</h2>
         <div class="location-container">
@@ -751,14 +742,13 @@
                         </div>
                     </div>
                 </div>
-                <a href="#" class="btn btn-primary whatsapp-directions" target="_blank" style="margin-top: 1rem;">
+                <a href="https://wa.me/2347033115877?text=Hello%20PastryKings%2C%20I%20need%20directions%20to%20your%20store" class="btn btn-primary" target="_blank" style="margin-top: 1rem;">
                     <i class="fab fa-whatsapp"></i> Get Directions on WhatsApp
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer id="contact">
         <div class="footer-content">
             <div class="footer-section">
@@ -768,7 +758,7 @@
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="whatsapp-social" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://wa.me/2347033115877" target="_blank"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
             <div class="footer-section">
@@ -791,23 +781,14 @@
         </div>
     </footer>
 
-    <!-- WhatsApp Float Button -->
-    <a href="#" class="whatsapp-float whatsapp-float-btn" target="_blank" title="Chat on WhatsApp">
+    <a href="https://wa.me/2347033115877?text=Hello%20PastryKings%20Abuja" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <script>
-        // ============================================
-        // CONFIGURATION - CHANGE THESE VALUES
-        // ============================================
-        const WHATSAPP_NUMBER = '2347033115877'; // Your WhatsApp number (country code + number, no + or spaces)
-        const ADMIN_PASSWORD = 'PastryKings2026'; // Change this to your preferred admin password
-        // ============================================
-
-        // Check if admin is already logged in this session
+        const ADMIN_PASSWORD = 'PastryKings2026';
         let isAdminLoggedIn = sessionStorage.getItem('pastryKingsAdmin') === 'true';
 
-        // Initialize data from localStorage
         let galleryImages = JSON.parse(localStorage.getItem('pastryKingsImages')) || [
             { id: 1, title: 'Wedding Cake', src: 'https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=600', date: '2024-01-15' },
             { id: 2, title: 'Chocolate Delight', src: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600', date: '2024-01-20' },
@@ -823,7 +804,6 @@
             { id: 3, name: 'Sarah Johnson', rating: 5, text: 'I ordered a custom birthday cake for my daughter and it was stunning! Thank you PastryKings!', date: '2024-03-05' }
         ];
 
-        // Display Gallery
         function displayGallery() {
             const galleryGrid = document.getElementById('galleryGrid');
             galleryGrid.innerHTML = galleryImages.map(img => `
@@ -837,7 +817,6 @@
             `).join('');
         }
 
-        // Display Reviews
         function displayReviews() {
             const reviewsGrid = document.getElementById('reviewsGrid');
             reviewsGrid.innerHTML = reviews.map(review => `
@@ -864,9 +843,6 @@
             return new Date(dateString).toLocaleDateString('en-US', options);
         }
 
-        // ============================================
-        // ADMIN LOGIN SYSTEM
-        // ============================================
         const adminModal = document.getElementById('adminModal');
         const adminTrigger = document.getElementById('adminTrigger');
         const modalClose = document.getElementById('modalClose');
@@ -876,11 +852,9 @@
         const uploadSection = document.getElementById('upload');
         const logoutBtn = document.getElementById('logoutBtn');
 
-        // Open login modal
         adminTrigger.addEventListener('click', function(e) {
             e.preventDefault();
             if (isAdminLoggedIn) {
-                // Already logged in - scroll to upload section
                 uploadSection.scrollIntoView({ behavior: 'smooth' });
             } else {
                 adminModal.classList.add('active');
@@ -890,33 +864,25 @@
             }
         });
 
-        // Close modal
         modalClose.addEventListener('click', () => adminModal.classList.remove('active'));
         adminModal.addEventListener('click', (e) => {
             if (e.target === adminModal) adminModal.classList.remove('active');
         });
 
-        // Handle login
         adminLoginForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const enteredPassword = adminPassword.value;
             
             if (enteredPassword === ADMIN_PASSWORD) {
-                // Successful login
                 isAdminLoggedIn = true;
                 sessionStorage.setItem('pastryKingsAdmin', 'true');
                 adminModal.classList.remove('active');
                 updateAdminUI();
-                
-                // Show success feedback
                 adminTrigger.innerHTML = '<i class="fas fa-user-check"></i> Admin';
-                
-                // Scroll to upload section
                 setTimeout(() => {
                     uploadSection.scrollIntoView({ behavior: 'smooth' });
                 }, 300);
             } else {
-                // Failed login
                 modalError.classList.add('show');
                 adminPassword.value = '';
                 adminPassword.focus();
@@ -924,7 +890,6 @@
             }
         });
 
-        // Logout
         logoutBtn.addEventListener('click', function() {
             if (confirm('Are you sure you want to logout?')) {
                 isAdminLoggedIn = false;
@@ -934,7 +899,6 @@
             }
         });
 
-        // Update UI based on admin status
         function updateAdminUI() {
             if (isAdminLoggedIn) {
                 uploadSection.classList.add('visible');
@@ -947,9 +911,6 @@
             }
         }
 
-        // ============================================
-        // IMAGE UPLOAD
-        // ============================================
         document.getElementById('imageUploadForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -989,9 +950,6 @@
             }
         });
 
-        // ============================================
-        // REVIEW FORM
-        // ============================================
         document.getElementById('reviewForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -1024,30 +982,6 @@
             });
         }
 
-        // ============================================
-        // WHATSAPP LINKS
-        // ============================================
-        function updateWhatsAppLinks() {
-            // Order button
-            document.querySelector('.whatsapp-order').href = 
-                `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello PastryKings, I would like to place an order')}`;
-            
-            // Directions button
-            document.querySelector('.whatsapp-directions').href = 
-                `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello PastryKings, I need directions to your store')}`;
-            
-            // Social WhatsApp
-            document.querySelector('.whatsapp-social').href = 
-                `https://wa.me/${WHATSAPP_NUMBER}`;
-            
-            // Float button
-            document.querySelector('.whatsapp-float-btn').href = 
-                `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello PastryKings Abuja')}`;
-        }
-
-        // ============================================
-        // SMOOTH SCROLLING & MOBILE MENU
-        // ============================================
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
@@ -1056,7 +990,6 @@
                 const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    // Close mobile menu if open
                     document.getElementById('navLinks').classList.remove('mobile-open');
                 }
             });
@@ -1066,21 +999,16 @@
             document.getElementById('navLinks').classList.toggle('mobile-open');
         });
 
-        // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && adminModal.classList.contains('active')) {
                 adminModal.classList.remove('active');
             }
         });
 
-        // ============================================
-        // INITIALIZE
-        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             displayGallery();
             displayReviews();
-            updateWhatsAppLinks();
-            updateAdminUI(); // Apply admin state on page load
+            updateAdminUI();
         });
     </script>
 </body>
