@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PastryKings Abuja | Premium Bakery & Confectionery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold-primary: #D4AF37;
+            --gold-light: #040402;
+            --gold-dark: #B8941F;
+            --black: #1a1a1a;
+            --white: #ffffff;
+            --cream: #FFF8DC;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--black);
+            overflow-x: hidden;
+        }
+
+        nav {
+            background: linear-gradient(135deg, var(--black) 0%, #2d2d2d 100%);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--gold-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover { color: var(--gold-primary); }
+
+        .admin-trigger {
+            cursor: pointer;
+            color: var(--gold-primary) !important;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .admin-trigger:hover { opacity: 1; }
+
+        .admin-trigger.logged-in {
+            background: var(--gold-primary);
+            color: var(--black) !important;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            opacity: 1;
+        }
+
+        .mobile-menu {
+            display: none;
+            color: var(--gold-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .hero {
+            margin-top: 70px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1920') center/cover;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--gold-primary);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: var(--black);
+            font-weight: bold;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold-primary);
+            border: 2px solid var(--gold-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold-primary);
+            color: var(--black);
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover { transform: scale(1.1); color: white; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        section { padding: 5rem 5%; }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--black);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold-primary), var(--gold-dark));
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .gallery { background: var(--cream); }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(212, 175, 55, 0.9));
+            padding: 2rem 1rem 1rem;
+            color: var(--black);
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay { transform: translateY(0); }
+
+        /* Upload Section - HIDDEN BY DEFAULT */
+        .upload-section {
+            background: linear-gradient(135deg, var(--black), #2d2d2d);
+            color: var(--white);
+            text-align: center;
+            display: none; /* Hidden by default */
+        }
+
+        .upload-section.visible { display: block; }
+
+        .upload-section .section-title { color: var(--gold-primary); }
+
+        .upload-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--gold-primary);
+        }
+
+        .form-group { margin-bottom: 1.5rem; text-align: left; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gold-primary);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--gold-primary);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            font-size: 1rem;
+        }
+
+        .form-group input[type="file"] {
+            background: transparent;
+            border: 2px dashed var(--gold-primary);
+            padding: 1rem;
+            cursor: pointer;
+        }
+
+        .form-group input[type="file"]::-webkit-file-upload-button {
+            background: var(--gold-primary);
+            color: var(--black);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 1rem;
+        }
+
+        .reviews { background: var(--white); }
+
+        .reviews-container { max-width: 1200px; margin: 0 auto; }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .review-card {
+            background: linear-gradient(135deg, var(--cream), var(--white));
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--gold-primary);
+            transition: transform 0.3s;
+        }
+
+        .review-card:hover { transform: translateY(-5px); }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .reviewer-name {
+            font-weight: bold;
+            color: var(--black);
+            font-size: 1.2rem;
+        }
+
+        .review-rating { color: var(--gold-primary); }
+
+        .review-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-text { color: #444; line-height: 1.8; }
+
+        .review-form-container {
+            background: linear-gradient(135deg, var(--gold-light), var(--cream));
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .review-form-container input,
+        .review-form-container textarea,
+        .review-form-container select {
+            background: white !important;
+            color: var(--black) !important;
+        }
+
+        .location { background: var(--cream); }
+
+        .location-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .map-wrapper {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            height: 400px;
+        }
+
+        .map-wrapper iframe { width: 100%; height: 100%; border: none; }
+
+        .location-info { padding: 2rem; }
+
+        .location-info h3 {
+            color: var(--gold-dark);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .location-details { margin: 2rem 0; }
+
+        .location-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .location-item i {
+            color: var(--gold-primary);
+            font-size: 1.5rem;
+            margin-top: 0.2rem;
+        }
+
+        .location-item div strong {
+            color: var(--black);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .location-item div p { color: #666; }
+
+        footer {
+            background: linear-gradient(135deg, var(--black), #2d2d2d);
+            color: var(--white);
+            padding: 3rem 5% 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            color: var(--gold-primary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #aaa;
+            text-decoration: none;
+            line-height: 2;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover { color: var(--gold-primary); }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--gold-primary);
+            color: var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover { transform: translateY(-3px); }
+
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 2rem;
+            color: #888;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Admin Login Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal-box {
+            background: linear-gradient(135deg, var(--black), #2d2d2d);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 2px solid var(--gold-primary);
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
+            position: relative;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--gold-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-title {
+            color: var(--gold-primary);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .modal-title i { margin-right: 0.5rem; }
+
+        .modal-box .form-group input {
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+        }
+
+        .modal-error {
+            background: #f44336;
+            color: white;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        .modal-error.show { display: block; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-links.mobile-open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--black);
+                padding: 1rem;
+            }
+            .mobile-menu { display: block; }
+            .hero-content h1 { font-size: 2rem; }
+            .hero-content p { font-size: 1.2rem; }
+            .location-container { grid-template-columns: 1fr; }
+            .reviews-grid { grid-template-columns: 1fr; }
+            section { padding: 3rem 5%; }
+        }
+
+        .success-message {
+            background: #4CAF50;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-crown"></i>
+                PastryKings
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#location">Location</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a class="admin-trigger" id="adminTrigger"><i class="fas fa-lock"></i> Admin</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin Login Modal -->
+    <div class="modal-overlay" id="adminModal">
+        <div class="modal-box">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <h2 class="modal-title"><i class="fas fa-crown"></i> Admin Login</h2>
+            <div class="modal-error" id="modalError">
+                <i class="fas fa-exclamation-circle"></i> Incorrect password. Try again.
+            </div>
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label for="adminPassword">Password</label>
+                    <input type="password" id="adminPassword" required placeholder="Enter admin password">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </form>
+            <p style="text-align: center; color: #888; margin-top: 1rem; font-size: 0.85rem;">
+                <i class="fas fa-shield-alt"></i> Authorized personnel only
+            </p>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1><i class="fas fa-crown"></i> PastryKings Abuja</h1>
+            <p>Where Every Bite is Royal Treatment</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary whatsapp-order" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Order Now
+                </a>
+                <a href="#gallery" class="btn btn-secondary">
+                    <i class="fas fa-images"></i> View Our Work
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <h2 class="section-title">Our Creations</h2>
+        <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <!-- Upload Section (ADMIN ONLY) -->
+    <section class="upload-section" id="upload">
+        <h2 class="section-title"><i class="fas fa-user-shield"></i> Admin: Upload Your Photos</h2>
+        <div class="upload-form">
+            <div class="success-message" id="uploadSuccess">
+                <i class="fas fa-check-circle"></i> Image uploaded successfully!
+            </div>
+            <form id="imageUploadForm">
+                <div class="form-group">
+                    <label for="imageTitle">Image Title</label>
+                    <input type="text" id="imageTitle" required placeholder="e.g., Wedding Cake">
+                </div>
+                <div class="form-group">
+                    <label for="imageFile">Choose Image</label>
+                    <input type="file" id="imageFile" accept="image/*" required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-upload"></i> Upload Image
+                </button>
+                <button type="button" class="btn btn-secondary" id="logoutBtn" style="margin-left: 1rem;">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews" id="reviews">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="reviews-container">
+            <div class="reviews-grid" id="reviewsGrid"></div>
+
+            <div class="review-form-container">
+                <h3 style="text-align: center; color: var(--black); margin-bottom: 1.5rem;">
+                    <i class="fas fa-star" style="color: var(--gold-primary);"></i> 
+                    Leave a Review
+                </h3>
+                <div class="success-message" id="reviewSuccess">
+                    <i class="fas fa-check-circle"></i> Thank you for your review!
+                </div>
+                <form id="reviewForm">
+                    <div class="form-group">
+                        <label for="reviewerName">Your Name</label>
+                        <input type="text" id="reviewerName" required placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewRating">Rating</label>
+                        <select id="reviewRating">
+                            <option value="5">⭐⭐⭐⭐⭐ (5 Stars)</option>
+                            <option value="4">⭐⭐⭐⭐ (4 Stars)</option>
+                            <option value="3">⭐⭐⭐ (3 Stars)</option>
+                            <option value="2">⭐⭐ (2 Stars)</option>
+                            <option value="1">⭐ (1 Star)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewText">Your Review</label>
+                        <textarea id="reviewText" rows="4" required placeholder="Share your experience with us..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Submit Review
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location" id="location">
+        <h2 class="section-title">Find Us</h2>
+        <div class="location-container">
+            <div class="map-wrapper">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.5!2d7.4913!3d9.0167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwMDEnMDAuMCJOIDfCsDI5JzI4LjciRQ!5e0!3m2!1sen!2sng!4v1234567890"
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+            <div class="location-info">
+                <h3><i class="fas fa-map-marker-alt" style="color: var(--gold-primary);"></i> Visit Our Bakery</h3>
+                <div class="location-details">
+                    <div class="location-item">
+                        <i class="fas fa-location-dot"></i>
+                        <div>
+                            <strong>Address</strong>
+                            <p>Oron Cl, Garki, Abuja 900103,<br>Federal Capital Territory, Nigeria</p>
+                        </div>
+                    </div>
+                    <div class="location-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Opening Hours</strong>
+                            <p>Monday - Saturday: 7:00 AM - 8:00 PM<br>Sunday: 9:00 AM - 6:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="location-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Contact</strong>
+                            <p>Phone: 0703 311 5877<br>Email: info@pastrykingsabuja.com</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-primary whatsapp-directions" target="_blank" style="margin-top: 1rem;">
+                    <i class="fab fa-whatsapp"></i> Get Directions on WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-crown"></i> PastryKings Abuja</h3>
+                <p>Abuja's premier bakery delivering exceptional pastries, cakes, and confectionery with a royal touch.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="whatsapp-social" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#home">Home</a></p>
+                <p><a href="#gallery">Gallery</a></p>
+                <p><a href="#reviews">Reviews</a></p>
+                <p><a href="#location">Location</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Oron Cl, Garki, Abuja 900103</p>
+                <p><i class="fas fa-phone"></i> 0703 311 5877</p>
+                <p><i class="fas fa-envelope"></i> info@pastrykingsabuja.com</p>
+                <p><i class="fas fa-clock"></i> Mon-Sat: 7AM - 8PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 PastryKings Abuja. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: var(--gold-primary);"></i> for royalty</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="#" class="whatsapp-float whatsapp-float-btn" target="_blank" title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // ============================================
+        // CONFIGURATION - CHANGE THESE VALUES
+        // ============================================
+        const WHATSAPP_NUMBER = '2347033115877'; // Your WhatsApp number (country code + number, no + or spaces)
+        const ADMIN_PASSWORD = 'PastryKings2026'; // Change this to your preferred admin password
+        // ============================================
+
+        // Check if admin is already logged in this session
+        let isAdminLoggedIn = sessionStorage.getItem('pastryKingsAdmin') === 'true';
+
+        // Initialize data from localStorage
+        let galleryImages = JSON.parse(localStorage.getItem('pastryKingsImages')) || [
+            { id: 1, title: 'Wedding Cake', src: 'https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=600', date: '2024-01-15' },
+            { id: 2, title: 'Chocolate Delight', src: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600', date: '2024-01-20' },
+            { id: 3, title: 'Cupcakes Collection', src: 'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=600', date: '2024-02-05' },
+            { id: 4, title: 'Birthday Special', src: 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600', date: '2024-02-14' },
+            { id: 5, title: 'Artisan Breads', src: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600', date: '2024-03-01' },
+            { id: 6, title: 'Pastries', src: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600', date: '2024-03-10' }
+        ];
+
+        let reviews = JSON.parse(localStorage.getItem('pastryKingsReviews')) || [
+            { id: 1, name: 'Chioma Okafor', rating: 5, text: 'Absolutely amazing! The wedding cake was beyond our expectations. Highly recommend PastryKings!', date: '2024-03-15' },
+            { id: 2, name: 'Ahmed Ibrahim', rating: 5, text: 'Best bakery in Abuja! Their pastries are always fresh and delicious. Will definitely keep coming back.', date: '2024-03-10' },
+            { id: 3, name: 'Sarah Johnson', rating: 5, text: 'I ordered a custom birthday cake for my daughter and it was stunning! Thank you PastryKings!', date: '2024-03-05' }
+        ];
+
+        // Display Gallery
+        function displayGallery() {
+            const galleryGrid = document.getElementById('galleryGrid');
+            galleryGrid.innerHTML = galleryImages.map(img => `
+                <div class="gallery-item">
+                    <img src="${img.src}" alt="${img.title}" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>${img.title}</h3>
+                        <p><i class="far fa-calendar"></i> ${formatDate(img.date)}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Display Reviews
+        function displayReviews() {
+            const reviewsGrid = document.getElementById('reviewsGrid');
+            reviewsGrid.innerHTML = reviews.map(review => `
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-name">
+                            <i class="fas fa-user-circle" style="color: var(--gold-primary); margin-right: 0.5rem;"></i>
+                            ${review.name}
+                        </div>
+                        <div class="review-rating">
+                            ${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}
+                        </div>
+                    </div>
+                    <div class="review-date">
+                        <i class="far fa-calendar"></i> ${formatDate(review.date)}
+                    </div>
+                    <div class="review-text">"${review.text}"</div>
+                </div>
+            `).join('');
+        }
+
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+
+        // ============================================
+        // ADMIN LOGIN SYSTEM
+        // ============================================
+        const adminModal = document.getElementById('adminModal');
+        const adminTrigger = document.getElementById('adminTrigger');
+        const modalClose = document.getElementById('modalClose');
+        const adminLoginForm = document.getElementById('adminLoginForm');
+        const adminPassword = document.getElementById('adminPassword');
+        const modalError = document.getElementById('modalError');
+        const uploadSection = document.getElementById('upload');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Open login modal
+        adminTrigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (isAdminLoggedIn) {
+                // Already logged in - scroll to upload section
+                uploadSection.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                adminModal.classList.add('active');
+                adminPassword.value = '';
+                modalError.classList.remove('show');
+                setTimeout(() => adminPassword.focus(), 100);
+            }
+        });
+
+        // Close modal
+        modalClose.addEventListener('click', () => adminModal.classList.remove('active'));
+        adminModal.addEventListener('click', (e) => {
+            if (e.target === adminModal) adminModal.classList.remove('active');
+        });
+
+        // Handle login
+        adminLoginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const enteredPassword = adminPassword.value;
+            
+            if (enteredPassword === ADMIN_PASSWORD) {
+                // Successful login
+                isAdminLoggedIn = true;
+                sessionStorage.setItem('pastryKingsAdmin', 'true');
+                adminModal.classList.remove('active');
+                updateAdminUI();
+                
+                // Show success feedback
+                adminTrigger.innerHTML = '<i class="fas fa-user-check"></i> Admin';
+                
+                // Scroll to upload section
+                setTimeout(() => {
+                    uploadSection.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            } else {
+                // Failed login
+                modalError.classList.add('show');
+                adminPassword.value = '';
+                adminPassword.focus();
+                setTimeout(() => modalError.classList.remove('show'), 3000);
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', function() {
+            if (confirm('Are you sure you want to logout?')) {
+                isAdminLoggedIn = false;
+                sessionStorage.removeItem('pastryKingsAdmin');
+                updateAdminUI();
+                document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Update UI based on admin status
+        function updateAdminUI() {
+            if (isAdminLoggedIn) {
+                uploadSection.classList.add('visible');
+                adminTrigger.classList.add('logged-in');
+                adminTrigger.innerHTML = '<i class="fas fa-user-shield"></i> Admin';
+            } else {
+                uploadSection.classList.remove('visible');
+                adminTrigger.classList.remove('logged-in');
+                adminTrigger.innerHTML = '<i class="fas fa-lock"></i> Admin';
+            }
+        }
+
+        // ============================================
+        // IMAGE UPLOAD
+        // ============================================
+        document.getElementById('imageUploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!isAdminLoggedIn) {
+                alert('Admin access required!');
+                return;
+            }
+            
+            const title = document.getElementById('imageTitle').value;
+            const fileInput = document.getElementById('imageFile');
+            const file = fileInput.files[0];
+            
+            if (file) {
+                try {
+                    const base64 = await fileToBase64(file);
+                    const newImage = {
+                        id: Date.now(),
+                        title: title,
+                        src: base64,
+                        date: new Date().toISOString()
+                    };
+                    
+                    galleryImages.unshift(newImage);
+                    localStorage.setItem('pastryKingsImages', JSON.stringify(galleryImages));
+                    displayGallery();
+                    
+                    const successMsg = document.getElementById('uploadSuccess');
+                    successMsg.style.display = 'block';
+                    setTimeout(() => successMsg.style.display = 'none', 3000);
+                    
+                    this.reset();
+                    document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+                } catch (error) {
+                    console.error('Error uploading image:', error);
+                    alert('Error uploading image. Please try a smaller file.');
+                }
+            }
+        });
+
+        // ============================================
+        // REVIEW FORM
+        // ============================================
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newReview = {
+                id: Date.now(),
+                name: document.getElementById('reviewerName').value,
+                rating: parseInt(document.getElementById('reviewRating').value),
+                text: document.getElementById('reviewText').value,
+                date: new Date().toISOString()
+            };
+            
+            reviews.unshift(newReview);
+            localStorage.setItem('pastryKingsReviews', JSON.stringify(reviews));
+            displayReviews();
+            
+            const successMsg = document.getElementById('reviewSuccess');
+            successMsg.style.display = 'block';
+            setTimeout(() => successMsg.style.display = 'none', 3000);
+            
+            this.reset();
+            document.getElementById('reviews').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        // ============================================
+        // WHATSAPP LINKS
+        // ============================================
+        function updateWhatsAppLinks() {
+            // Order button
+            document.querySelector('.whatsapp-order').href = 
+                `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello PastryKings, I would like to place an order')}`;
+            
+            // Directions button
+            document.querySelector('.whatsapp-directions').href = 
+                `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello PastryKings, I need directions to your store')}`;
+            
+            // Social WhatsApp
+            document.querySelector('.whatsapp-social').href = 
+                `https://wa.me/${WHATSAPP_NUMBER}`;
+            
+            // Float button
+            document.querySelector('.whatsapp-float-btn').href = 
+                `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello PastryKings Abuja')}`;
+        }
+
+        // ============================================
+        // SMOOTH SCROLLING & MOBILE MENU
+        // ============================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#' || this.classList.contains('admin-trigger')) return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Close mobile menu if open
+                    document.getElementById('navLinks').classList.remove('mobile-open');
+                }
+            });
+        });
+
+        document.getElementById('mobileMenu').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('mobile-open');
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && adminModal.classList.contains('active')) {
+                adminModal.classList.remove('active');
+            }
+        });
+
+        // ============================================
+        // INITIALIZE
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            displayGallery();
+            displayReviews();
+            updateWhatsAppLinks();
+            updateAdminUI(); // Apply admin state on page load
+        });
+    </script>
+</body>
+</html>
